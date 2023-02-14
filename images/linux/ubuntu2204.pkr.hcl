@@ -145,42 +145,65 @@ variable "vm_size" {
   default = "Standard_D4s_v4"
 }
 
-source "azure-arm" "build_vhd" {
-  allowed_inbound_ip_addresses           = "${var.allowed_inbound_ip_addresses}"
-  build_resource_group_name              = "${var.build_resource_group_name}"
-  capture_container_name                 = "images"
-  capture_name_prefix                    = "${var.capture_name_prefix}"
-  client_id                              = "${var.client_id}"
-  client_secret                          = "${var.client_secret}"
-  client_cert_path                       = "${var.client_cert_path}"
-  image_offer                            = "0001-com-ubuntu-server-jammy"
-  image_publisher                        = "canonical"
-  image_sku                              = "22_04-lts"
-  location                               = "${var.location}"
-  os_disk_size_gb                        = "86"
-  os_type                                = "Linux"
-  private_virtual_network_with_public_ip = "${var.private_virtual_network_with_public_ip}"
-  resource_group_name                    = "${var.resource_group}"
-  storage_account                        = "${var.storage_account}"
-  subscription_id                        = "${var.subscription_id}"
-  temp_resource_group_name               = "${var.temp_resource_group_name}"
-  tenant_id                              = "${var.tenant_id}"
-  virtual_network_name                   = "${var.virtual_network_name}"
-  virtual_network_resource_group_name    = "${var.virtual_network_resource_group_name}"
-  virtual_network_subnet_name            = "${var.virtual_network_subnet_name}"
-  vm_size                                = "${var.vm_size}"
+# source "azure-arm" "build_vhd" {
+#   allowed_inbound_ip_addresses           = "${var.allowed_inbound_ip_addresses}"
+#   build_resource_group_name              = "${var.build_resource_group_name}"
+#   capture_container_name                 = "images"
+#   capture_name_prefix                    = "${var.capture_name_prefix}"
+#   client_id                              = "${var.client_id}"
+#   client_secret                          = "${var.client_secret}"
+#   client_cert_path                       = "${var.client_cert_path}"
+#   image_offer                            = "0001-com-ubuntu-server-jammy"
+#   image_publisher                        = "canonical"
+#   image_sku                              = "22_04-lts"
+#   location                               = "${var.location}"
+#   os_disk_size_gb                        = "86"
+#   os_type                                = "Linux"
+#   private_virtual_network_with_public_ip = "${var.private_virtual_network_with_public_ip}"
+#   resource_group_name                    = "${var.resource_group}"
+#   storage_account                        = "${var.storage_account}"
+#   subscription_id                        = "${var.subscription_id}"
+#   temp_resource_group_name               = "${var.temp_resource_group_name}"
+#   tenant_id                              = "${var.tenant_id}"
+#   virtual_network_name                   = "${var.virtual_network_name}"
+#   virtual_network_resource_group_name    = "${var.virtual_network_resource_group_name}"
+#   virtual_network_subnet_name            = "${var.virtual_network_subnet_name}"
+#   vm_size                                = "${var.vm_size}"
+# 
+#   dynamic "azure_tag" {
+#     for_each = var.azure_tag
+#     content {
+#       name = azure_tag.key
+#       value = azure_tag.value
+#     }
+#   }
+# }
 
-  dynamic "azure_tag" {
-    for_each = var.azure_tag
-    content {
-      name = azure_tag.key
-      value = azure_tag.value
+source "openstack" "runner-default" {
+  source_image_filter {
+    filters {
+      tags = ["garm", "runner-base-ubuntu-20_04-minimal", "dev"]
     }
+    most_recent = true
+  }
+  flavor       = "m1.small"
+  image_name   = "upstream-test" # cannot use '.' -> build fails
+  ssh_username = "ubuntu"
+  networks = ["c64f6132-9ef4-4386-bfa0-a59df3984722"]
+  security_groups = ["jump"] 
+  image_tags = ["test"]
+  metadata = {
+    "os_type"="linux",
+    "os_distro"="ubuntu",
+    "os_version"="20.04",
+    "architecture"="x86_64",
+    "garm"="default",
   }
 }
 
 build {
-  sources = ["source.azure-arm.build_vhd"]
+  #sources = ["source.azure-arm.build_vhd"]
+  sources = ["source.openstack.runner-default"]
 
   provisioner "shell" {
     execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
