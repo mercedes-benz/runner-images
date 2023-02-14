@@ -180,13 +180,14 @@ variable "vm_size" {
 # }
 
 source "openstack" "runner-default" {
-  source_image_filter {
-    filters {
-      tags = ["garm", "runner-base-ubuntu-20_04-minimal", "dev"]
-    }
-    most_recent = true
-  }
-  flavor       = "m1.small"
+  #source_image_filter {
+  #  filters {
+  #    tags = ["garm", "runner-base-ubuntu-20_04-minimal", "dev"]
+  #  }
+  #  most_recent = true
+  #}
+  source_image = "4502b770-3005-4a12-bc7e-e7649a05ff33"
+  flavor       = "m1.medium"
   image_name   = "upstream-test" # cannot use '.' -> build fails
   ssh_username = "ubuntu"
   networks = ["c64f6132-9ef4-4386-bfa0-a59df3984722"]
@@ -441,9 +442,9 @@ build {
     inline          = ["mkdir -p /etc/vsts", "cp /tmp/ubuntu2204.conf /etc/vsts/machine_instance.conf"]
   }
 
-  provisioner "shell" {
-    execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    inline          = ["sleep 30", "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"]
-  }
+  #provisioner "shell" {
+  #  execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  #  inline          = ["sleep 30", "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"]
+  #}
 
 }
