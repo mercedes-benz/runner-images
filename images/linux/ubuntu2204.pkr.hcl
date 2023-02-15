@@ -189,7 +189,8 @@ source "openstack" "runner-default" {
   #}
   #source_image = "b1c005f2-194c-4835-aea0-531b5733a23f" # -> road runner base server
   #source_image = "e3031d2f-0bd1-4644-b1e7-61c0dd62f0e3" # -> marker 1
-  source_image = "bc62dc34-c53a-4395-b4ca-77c53ff93802" # -> marker 2
+  #source_image = "bc62dc34-c53a-4395-b4ca-77c53ff93802" # -> marker 2
+  source_image = "6669c048-cdcb-480b-8f7b-e6c97f96eaa6" # -> marker 3
   flavor       = "m1.medium"
   image_name   = "upstream-test" # cannot use '.' -> build fails
   ssh_username = "ubuntu"
@@ -323,21 +324,21 @@ build {
                         #"${path.root}/scripts/installers/containers.sh",
                         #"${path.root}/scripts/installers/dotnetcore-sdk.sh",
                         #"${path.root}/scripts/installers/firefox.sh", # ->marker 2
-                        "${path.root}/scripts/installers/microsoft-edge.sh",
-                        "${path.root}/scripts/installers/gcc.sh",
-                        "${path.root}/scripts/installers/gfortran.sh",
-                        "${path.root}/scripts/installers/git.sh",
-                        "${path.root}/scripts/installers/github-cli.sh",
-                        #"${path.root}/scripts/installers/google-chrome.sh",
-                        #"${path.root}/scripts/installers/google-cloud-sdk.sh",
-                        #"${path.root}/scripts/installers/haskell.sh",
-                        #"${path.root}/scripts/installers/heroku.sh",
-                        #"${path.root}/scripts/installers/java-tools.sh",
-                        #"${path.root}/scripts/installers/kubernetes-tools.sh",
-                        #"${path.root}/scripts/installers/oc.sh",
-                        #"${path.root}/scripts/installers/leiningen.sh",
-                        #"${path.root}/scripts/installers/miniconda.sh",
-                        #"${path.root}/scripts/installers/mono.sh",
+                        #"${path.root}/scripts/installers/microsoft-edge.sh",
+                        #"${path.root}/scripts/installers/gcc.sh",
+                        #"${path.root}/scripts/installers/gfortran.sh",
+                        #"${path.root}/scripts/installers/git.sh",
+                        #"${path.root}/scripts/installers/github-cli.sh", # -> marker 3
+                        "${path.root}/scripts/installers/google-chrome.sh",
+                        "${path.root}/scripts/installers/google-cloud-sdk.sh",
+                        "${path.root}/scripts/installers/haskell.sh",
+                        "${path.root}/scripts/installers/heroku.sh",
+                        "${path.root}/scripts/installers/java-tools.sh",
+                        "${path.root}/scripts/installers/kubernetes-tools.sh",
+                        "${path.root}/scripts/installers/oc.sh",
+                        "${path.root}/scripts/installers/leiningen.sh",
+                        "${path.root}/scripts/installers/miniconda.sh",
+                        "${path.root}/scripts/installers/mono.sh",
                         #"${path.root}/scripts/installers/kotlin.sh",
                         #"${path.root}/scripts/installers/mysql.sh",
                         #"${path.root}/scripts/installers/mssql-cmd-tools.sh",
