@@ -194,7 +194,7 @@ source "openstack" "runner-default" {
   #source_image = "bf7eb0b4-f483-4507-bb39-3a6f51a6c058" # -> marker 4
   source_image = "9630e5cd-0d44-4cbc-9a10-c276f485de6e" # -> marker 5
 
-  flavor       = "m1.medium"
+  flavor       = "m1.large"
   image_name   = "upstream-test" # cannot use '.' -> build fails
   ssh_username = "ubuntu"
   networks = ["c64f6132-9ef4-4386-bfa0-a59df3984722"]
