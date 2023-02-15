@@ -418,22 +418,25 @@ build {
     script          = "${path.root}/scripts/base/apt-mock-remove.sh"
   }
 
-  provisioner "shell" {
-    environment_vars = ["IMAGE_VERSION=${var.image_version}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}"]
-    inline           = ["pwsh -File ${var.image_folder}/SoftwareReport/SoftwareReport.Generator.ps1 -OutputDirectory ${var.image_folder}", "pwsh -File ${var.image_folder}/tests/RunAll-Tests.ps1 -OutputDirectory ${var.image_folder}"]
-  }
+  # TODO maigl disabled -> no report
+  #provisioner "shell" {
+  #  environment_vars = ["IMAGE_VERSION=${var.image_version}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}"]
+  #  inline           = ["pwsh -File ${var.image_folder}/SoftwareReport/SoftwareReport.Generator.ps1 -OutputDirectory ${var.image_folder}", "pwsh -File ${var.image_folder}/tests/RunAll-Tests.ps1 -OutputDirectory ${var.image_folder}"]
+  #}
 
-  provisioner "file" {
-    destination = "${path.root}/Ubuntu2204-Readme.md"
-    direction   = "download"
-    source      = "${var.image_folder}/software-report.md"
-  }
+  # TODO maigl disabled -> no report
+  #provisioner "file" {
+  #  destination = "${path.root}/Ubuntu2204-Readme.md"
+  #  direction   = "download"
+  #  source      = "${var.image_folder}/software-report.md"
+  #}
 
-  provisioner "file" {
-    destination = "${path.root}/software-report.json"
-    direction   = "download"
-    source      = "${var.image_folder}/software-report.json"
-  }
+  # TODO: maigl disabled since report fails as we disable some tools
+  #provisioner "file" {
+  #  destination = "${path.root}/software-report.json"
+  #  direction   = "download"
+  #  source      = "${var.image_folder}/software-report.json"
+  #}
 
   provisioner "shell" {
     environment_vars = ["HELPER_SCRIPT_FOLDER=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}", "IMAGE_FOLDER=${var.image_folder}"]
@@ -456,9 +459,10 @@ build {
     inline          = ["mkdir -p /etc/vsts", "cp /tmp/ubuntu2204.conf /etc/vsts/machine_instance.conf"]
   }
 
-  provisioner "shell" {
-    execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    inline          = ["sleep 30", "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"]
-  }
+  # TODO maigl no waagent
+  #provisioner "shell" {
+  #  execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  #  inline          = ["sleep 30", "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"]
+  #}
 
 }
