@@ -145,6 +145,11 @@ variable "vm_size" {
   default = "Standard_D4s_v4"
 }
 
+variable "github_token" {
+  type    = string
+  default = "${env("GITHUB_TOKEN")}"
+}
+
 # source "azure-arm" "build_vhd" {
 #   allowed_inbound_ip_addresses           = "${var.allowed_inbound_ip_addresses}"
 #   build_resource_group_name              = "${var.build_resource_group_name}"
@@ -187,7 +192,8 @@ source "openstack" "runner-default" {
   #  most_recent = true
   #}
   #source_image = "4502b770-3005-4a12-bc7e-e7649a05ff33"
-  source_image = "9051f9c4-5f4f-44d9-a85d-aa0d2e818623"
+  #source_image = "9051f9c4-5f4f-44d9-a85d-aa0d2e818623"
+  source_image = "ae8c6ebf-bd43-43a7-a734-c73d435f768a"
   flavor       = "m1.medium"
   image_name   = "upstream-test" # cannot use '.' -> build fails
   ssh_username = "ubuntu"
@@ -206,6 +212,14 @@ source "openstack" "runner-default" {
 build {
   #sources = ["source.azure-arm.build_vhd"]
   sources = ["source.openstack.runner-default"]
+
+  # todo needed to avoid github rate limit
+  provisioner "shell" {
+    inline = [
+      #"echo ${var.github_token} | gh auth login --with-token",
+      "echo 'machine github.com login mister-x password ${var.github_token}' > ~/.netrc",
+    ]
+  }
 
   #provisioner "shell" {
   #  execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
@@ -303,30 +317,30 @@ build {
     environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}", "DEBIAN_FRONTEND=noninteractive"]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     scripts          = [
-                        "${path.root}/scripts/installers/azcopy.sh",
-                        "${path.root}/scripts/installers/azure-cli.sh",
-                        "${path.root}/scripts/installers/azure-devops-cli.sh",
-                        "${path.root}/scripts/installers/basic.sh",
-                        "${path.root}/scripts/installers/bicep.sh",
-                        "${path.root}/scripts/installers/aliyun-cli.sh",
-                        "${path.root}/scripts/installers/apache.sh",
-                        "${path.root}/scripts/installers/aws.sh",
-                        "${path.root}/scripts/installers/clang.sh",
+                        #"${path.root}/scripts/installers/azcopy.sh",
+                        #"${path.root}/scripts/installers/azure-cli.sh",
+                        #"${path.root}/scripts/installers/azure-devops-cli.sh",
+                        #"${path.root}/scripts/installers/basic.sh",
+                        #"${path.root}/scripts/installers/bicep.sh",
+                        #"${path.root}/scripts/installers/aliyun-cli.sh",
+                        #"${path.root}/scripts/installers/apache.sh",
+                        #"${path.root}/scripts/installers/aws.sh",
+                        #"${path.root}/scripts/installers/clang.sh",
                         #"${path.root}/scripts/installers/swift.sh",
-                        #"${path.root}/scripts/installers/cmake.sh",
-                        #"${path.root}/scripts/installers/codeql-bundle.sh",
-                        #"${path.root}/scripts/installers/containers.sh",
-                        #"${path.root}/scripts/installers/dotnetcore-sdk.sh",
-                        #"${path.root}/scripts/installers/firefox.sh",
-                        #"${path.root}/scripts/installers/microsoft-edge.sh",
-                        #"${path.root}/scripts/installers/gcc.sh",
-                        #"${path.root}/scripts/installers/gfortran.sh",
-                        #"${path.root}/scripts/installers/git.sh",
-                        #"${path.root}/scripts/installers/github-cli.sh",
-                        #"${path.root}/scripts/installers/google-chrome.sh",
-                        #"${path.root}/scripts/installers/google-cloud-sdk.sh",
-                        #"${path.root}/scripts/installers/haskell.sh",
-                        #"${path.root}/scripts/installers/heroku.sh",
+                        "${path.root}/scripts/installers/cmake.sh",
+                        "${path.root}/scripts/installers/codeql-bundle.sh",
+                        "${path.root}/scripts/installers/containers.sh",
+                        "${path.root}/scripts/installers/dotnetcore-sdk.sh",
+                        "${path.root}/scripts/installers/firefox.sh",
+                        "${path.root}/scripts/installers/microsoft-edge.sh",
+                        "${path.root}/scripts/installers/gcc.sh",
+                        "${path.root}/scripts/installers/gfortran.sh",
+                        "${path.root}/scripts/installers/git.sh",
+                        "${path.root}/scripts/installers/github-cli.sh",
+                        "${path.root}/scripts/installers/google-chrome.sh",
+                        "${path.root}/scripts/installers/google-cloud-sdk.sh",
+                        "${path.root}/scripts/installers/haskell.sh",
+                        "${path.root}/scripts/installers/heroku.sh",
                         #"${path.root}/scripts/installers/java-tools.sh",
                         #"${path.root}/scripts/installers/kubernetes-tools.sh",
                         #"${path.root}/scripts/installers/oc.sh",
