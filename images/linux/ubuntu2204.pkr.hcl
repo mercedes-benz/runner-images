@@ -191,7 +191,8 @@ source "openstack" "runner-default" {
   #source_image = "e3031d2f-0bd1-4644-b1e7-61c0dd62f0e3" # -> marker 1
   #source_image = "bc62dc34-c53a-4395-b4ca-77c53ff93802" # -> marker 2
   #source_image = "6669c048-cdcb-480b-8f7b-e6c97f96eaa6" # -> marker 3
-  source_image = "bf7eb0b4-f483-4507-bb39-3a6f51a6c058" # -> marker 4
+  #source_image = "bf7eb0b4-f483-4507-bb39-3a6f51a6c058" # -> marker 4
+  source_image = "9630e5cd-0d44-4cbc-9a10-c276f485de6e" # -> marker 5
 
   flavor       = "m1.medium"
   image_name   = "upstream-test" # cannot use '.' -> build fails
@@ -341,34 +342,34 @@ build {
                         #"${path.root}/scripts/installers/leiningen.sh",
                         #"${path.root}/scripts/installers/miniconda.sh",
                         #"${path.root}/scripts/installers/mono.sh", # -> marker 4
-                        "${path.root}/scripts/installers/kotlin.sh",
-                        "${path.root}/scripts/installers/mysql.sh",
-                        #"${path.root}/scripts/installers/mssql-cmd-tools.sh", # todo maigl -> this breaks apt
-                        "${path.root}/scripts/installers/sqlpackage.sh",
-                        "${path.root}/scripts/installers/nginx.sh",
-                        "${path.root}/scripts/installers/nvm.sh",
-                        "${path.root}/scripts/installers/nodejs.sh",
-                        "${path.root}/scripts/installers/bazel.sh",
-                        "${path.root}/scripts/installers/oras-cli.sh",
-                        "${path.root}/scripts/installers/php.sh",
-                        "${path.root}/scripts/installers/postgresql.sh",
-                        "${path.root}/scripts/installers/pulumi.sh",
-                        "${path.root}/scripts/installers/ruby.sh",
-                        "${path.root}/scripts/installers/r.sh",
-                        #"${path.root}/scripts/installers/rust.sh",
-                        #"${path.root}/scripts/installers/julia.sh",
-                        #"${path.root}/scripts/installers/sbt.sh",
-                        #"${path.root}/scripts/installers/selenium.sh",
-                        #"${path.root}/scripts/installers/terraform.sh",
-                        #"${path.root}/scripts/installers/packer.sh",
-                        #"${path.root}/scripts/installers/vcpkg.sh",
-                        #"${path.root}/scripts/installers/dpkg-config.sh",
-                        #"${path.root}/scripts/installers/yq.sh",
-                        #"${path.root}/scripts/installers/android.sh",
-                        #"${path.root}/scripts/installers/pypy.sh",
-                        #"${path.root}/scripts/installers/python.sh",
-                        #"${path.root}/scripts/installers/graalvm.sh",
-                        #"${path.root}/scripts/installers/zstd.sh"
+                        #"${path.root}/scripts/installers/kotlin.sh",
+                        #"${path.root}/scripts/installers/mysql.sh",
+                        ###"${path.root}/scripts/installers/mssql-cmd-tools.sh", # todo maigl -> this breaks apt
+                        #"${path.root}/scripts/installers/sqlpackage.sh",
+                        #"${path.root}/scripts/installers/nginx.sh",
+                        #"${path.root}/scripts/installers/nvm.sh",
+                        #"${path.root}/scripts/installers/nodejs.sh",
+                        #"${path.root}/scripts/installers/bazel.sh",
+                        #"${path.root}/scripts/installers/oras-cli.sh",
+                        #"${path.root}/scripts/installers/php.sh",
+                        #"${path.root}/scripts/installers/postgresql.sh",
+                        #"${path.root}/scripts/installers/pulumi.sh",
+                        #"${path.root}/scripts/installers/ruby.sh",
+                        #"${path.root}/scripts/installers/r.sh", # -> marker 5
+                        "${path.root}/scripts/installers/rust.sh",
+                        "${path.root}/scripts/installers/julia.sh",
+                        "${path.root}/scripts/installers/sbt.sh",
+                        "${path.root}/scripts/installers/selenium.sh",
+                        "${path.root}/scripts/installers/terraform.sh",
+                        "${path.root}/scripts/installers/packer.sh",
+                        "${path.root}/scripts/installers/vcpkg.sh",
+                        "${path.root}/scripts/installers/dpkg-config.sh",
+                        "${path.root}/scripts/installers/yq.sh",
+                        "${path.root}/scripts/installers/android.sh",
+                        "${path.root}/scripts/installers/pypy.sh",
+                        "${path.root}/scripts/installers/python.sh",
+                        "${path.root}/scripts/installers/graalvm.sh",
+                        "${path.root}/scripts/installers/zstd.sh"
                         ]
   }
 
