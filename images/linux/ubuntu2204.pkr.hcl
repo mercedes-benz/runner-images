@@ -188,7 +188,8 @@ source "openstack" "runner-default" {
   #  most_recent = true
   #}
   #source_image = "b1c005f2-194c-4835-aea0-531b5733a23f" # -> road runner base server
-  source_image = "e3031d2f-0bd1-4644-b1e7-61c0dd62f0e3" # -> marker 1
+  #source_image = "e3031d2f-0bd1-4644-b1e7-61c0dd62f0e3" # -> marker 1
+  source_image = "bc62dc34-c53a-4395-b4ca-77c53ff93802" # -> marker 2
   flavor       = "m1.medium"
   image_name   = "upstream-test" # cannot use '.' -> build fails
   ssh_username = "ubuntu"
@@ -307,26 +308,26 @@ build {
     environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}", "DEBIAN_FRONTEND=noninteractive"]
     execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     scripts          = [
-                        "${path.root}/scripts/installers/azcopy.sh",
-                        "${path.root}/scripts/installers/azure-cli.sh",
-                        "${path.root}/scripts/installers/azure-devops-cli.sh",
-                        "${path.root}/scripts/installers/basic.sh",
-                        "${path.root}/scripts/installers/bicep.sh",
-                        "${path.root}/scripts/installers/aliyun-cli.sh",
-                        "${path.root}/scripts/installers/apache.sh",
-                        "${path.root}/scripts/installers/aws.sh",
-                        "${path.root}/scripts/installers/clang.sh",
-                        "${path.root}/scripts/installers/swift.sh",
-                        "${path.root}/scripts/installers/cmake.sh",
-                        "${path.root}/scripts/installers/codeql-bundle.sh",
-                        "${path.root}/scripts/installers/containers.sh",
-                        "${path.root}/scripts/installers/dotnetcore-sdk.sh",
-                        "${path.root}/scripts/installers/firefox.sh",
-                        #"${path.root}/scripts/installers/microsoft-edge.sh",
-                        #"${path.root}/scripts/installers/gcc.sh",
-                        #"${path.root}/scripts/installers/gfortran.sh",
-                        #"${path.root}/scripts/installers/git.sh",
-                        #"${path.root}/scripts/installers/github-cli.sh",
+                        #"${path.root}/scripts/installers/azcopy.sh",
+                        #"${path.root}/scripts/installers/azure-cli.sh",
+                        #"${path.root}/scripts/installers/azure-devops-cli.sh",
+                        #"${path.root}/scripts/installers/basic.sh",
+                        #"${path.root}/scripts/installers/bicep.sh",
+                        #"${path.root}/scripts/installers/aliyun-cli.sh",
+                        #"${path.root}/scripts/installers/apache.sh",
+                        #"${path.root}/scripts/installers/aws.sh",
+                        #"${path.root}/scripts/installers/clang.sh",
+                        #"${path.root}/scripts/installers/swift.sh",
+                        #"${path.root}/scripts/installers/cmake.sh",
+                        #"${path.root}/scripts/installers/codeql-bundle.sh",
+                        #"${path.root}/scripts/installers/containers.sh",
+                        #"${path.root}/scripts/installers/dotnetcore-sdk.sh",
+                        #"${path.root}/scripts/installers/firefox.sh", # ->marker 2
+                        "${path.root}/scripts/installers/microsoft-edge.sh",
+                        "${path.root}/scripts/installers/gcc.sh",
+                        "${path.root}/scripts/installers/gfortran.sh",
+                        "${path.root}/scripts/installers/git.sh",
+                        "${path.root}/scripts/installers/github-cli.sh",
                         #"${path.root}/scripts/installers/google-chrome.sh",
                         #"${path.root}/scripts/installers/google-cloud-sdk.sh",
                         #"${path.root}/scripts/installers/haskell.sh",
