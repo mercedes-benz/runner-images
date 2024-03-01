@@ -287,11 +287,11 @@ build {
       "${path.root}/../scripts/build/install-clang.sh",
       "${path.root}/../scripts/build/install-swift.sh",
       "${path.root}/../scripts/build/install-cmake.sh",
-      "${path.root}/../scripts/build/install-codeql-bundle.sh",
+      //"${path.root}/../scripts/build/install-codeql-bundle.sh",
       "${path.root}/../scripts/build/install-container-tools.sh",
       "${path.root}/../scripts/build/install-dotnetcore-sdk.sh",
       "${path.root}/../scripts/build/install-firefox.sh",
-      "${path.root}/../scripts/build/install-microsoft-edge.sh",
+      //"${path.root}/../scripts/build/install-microsoft-edge.sh",
       "${path.root}/../scripts/build/install-gcc-compilers.sh",
       "${path.root}/../scripts/build/install-gfortran.sh",
       "${path.root}/../scripts/build/install-git.sh",
@@ -299,7 +299,7 @@ build {
       "${path.root}/../scripts/build/install-github-cli.sh",
       "${path.root}/../scripts/build/install-google-chrome.sh",
       "${path.root}/../scripts/build/install-google-cloud-cli.sh",
-      "${path.root}/../scripts/build/install-haskell.sh",
+      //"${path.root}/../scripts/build/install-haskell.sh",
       "${path.root}/../scripts/build/install-heroku.sh",
       "${path.root}/../scripts/build/install-java-tools.sh",
       "${path.root}/../scripts/build/install-kubernetes-tools.sh",
@@ -330,7 +330,7 @@ build {
       "${path.root}/../scripts/build/install-vcpkg.sh",
       "${path.root}/../scripts/build/configure-dpkg.sh",
       "${path.root}/../scripts/build/install-yq.sh",
-      "${path.root}/../scripts/build/install-android-sdk.sh",
+      //"${path.root}/../scripts/build/install-android-sdk.sh",
       "${path.root}/../scripts/build/install-pypy.sh",
       "${path.root}/../scripts/build/install-python.sh",
       "${path.root}/../scripts/build/install-zstd.sh"
@@ -338,84 +338,84 @@ build {
   }
 
   provisioner "shell" {
-    environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}", "DOCKERHUB_LOGIN=${var.dockerhub_login}", "DOCKERHUB_PASSWORD=${var.dockerhub_password}"]
-    execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    scripts          = ["${path.root}/../scripts/build/install-docker-compose.sh", "${path.root}/../scripts/build/install-docker.sh"]
+  environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}", "DOCKERHUB_LOGIN=${var.dockerhub_login}", "DOCKERHUB_PASSWORD=${var.dockerhub_password}"]
+  execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  scripts          = ["${path.root}/../scripts/build/install-docker-compose.sh", "${path.root}/../scripts/build/install-docker.sh"]
   }
 
   provisioner "shell" {
-    environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}"]
-    execute_command  = "sudo sh -c '{{ .Vars }} pwsh -f {{ .Path }}'"
-    scripts          = ["${path.root}/../scripts/build/Install-Toolset.ps1", "${path.root}/../scripts/build/Configure-Toolset.ps1"]
+  environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}"]
+  execute_command  = "sudo sh -c '{{ .Vars }} pwsh -f {{ .Path }}'"
+  scripts          = ["${path.root}/../scripts/build/Install-Toolset.ps1", "${path.root}/../scripts/build/Configure-Toolset.ps1"]
   }
 
   provisioner "shell" {
-    environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}"]
-    execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    scripts          = ["${path.root}/../scripts/build/install-pipx-packages.sh"]
+  environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}"]
+  execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  scripts          = ["${path.root}/../scripts/build/install-pipx-packages.sh"]
   }
 
   provisioner "shell" {
-    environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}", "DEBIAN_FRONTEND=noninteractive", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}"]
-    execute_command  = "/bin/sh -c '{{ .Vars }} {{ .Path }}'"
-    scripts          = ["${path.root}/../scripts/build/install-homebrew.sh"]
+  environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}", "DEBIAN_FRONTEND=noninteractive", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}"]
+  execute_command  = "/bin/sh -c '{{ .Vars }} {{ .Path }}'"
+  scripts          = ["${path.root}/../scripts/build/install-homebrew.sh"]
   }
 
   provisioner "shell" {
-    environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}"]
-    execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    scripts          = ["${path.root}/../scripts/build/configure-snap.sh"]
+  environment_vars = ["HELPER_SCRIPTS=${var.helper_script_folder}"]
+  execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  scripts          = ["${path.root}/../scripts/build/configure-snap.sh"]
   }
 
   provisioner "shell" {
-    execute_command   = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    expect_disconnect = true
-    inline            = ["echo 'Reboot VM'", "sudo reboot"]
+  execute_command   = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  expect_disconnect = true
+  inline            = ["echo 'Reboot VM'", "sudo reboot"]
   }
 
   provisioner "shell" {
-    execute_command     = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    pause_before        = "1m0s"
-    scripts             = ["${path.root}/../scripts/build/cleanup.sh"]
-    start_retry_timeout = "10m"
+  execute_command     = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  pause_before        = "1m0s"
+  scripts             = ["${path.root}/../scripts/build/cleanup.sh"]
+  start_retry_timeout = "10m"
   }
 
   provisioner "shell" {
-    environment_vars = ["IMAGE_VERSION=${var.image_version}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}"]
-    inline           = ["pwsh -File ${var.image_folder}/SoftwareReport/Generate-SoftwareReport.ps1 -OutputDirectory ${var.image_folder}", "pwsh -File ${var.image_folder}/tests/RunAll-Tests.ps1 -OutputDirectory ${var.image_folder}"]
+  environment_vars = ["IMAGE_VERSION=${var.image_version}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}"]
+  inline           = ["pwsh -File ${var.image_folder}/SoftwareReport/Generate-SoftwareReport.ps1 -OutputDirectory ${var.image_folder}", "pwsh -File ${var.image_folder}/tests/RunAll-Tests.ps1 -OutputDirectory ${var.image_folder}"]
   }
 
   provisioner "file" {
-    destination = "${path.root}/../Ubuntu2204-Readme.md"
-    direction   = "download"
-    source      = "${var.image_folder}/software-report.md"
+  destination = "${path.root}/../Ubuntu2204-Readme.md"
+  direction   = "download"
+  source      = "${var.image_folder}/software-report.md"
   }
 
   provisioner "file" {
-    destination = "${path.root}/../software-report.json"
-    direction   = "download"
-    source      = "${var.image_folder}/software-report.json"
+  destination = "${path.root}/../software-report.json"
+  direction   = "download"
+  source      = "${var.image_folder}/software-report.json"
   }
 
   provisioner "shell" {
-    environment_vars = ["HELPER_SCRIPT_FOLDER=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}", "IMAGE_FOLDER=${var.image_folder}"]
-    execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    scripts          = ["${path.root}/../scripts/build/configure-system.sh"]
+  environment_vars = ["HELPER_SCRIPT_FOLDER=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}", "IMAGE_FOLDER=${var.image_folder}"]
+  execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  scripts          = ["${path.root}/../scripts/build/configure-system.sh"]
   }
 
   provisioner "file" {
-    destination = "/tmp/"
-    source      = "${path.root}/../assets/ubuntu2204.conf"
+  destination = "/tmp/"
+  source      = "${path.root}/../assets/ubuntu2204.conf"
   }
 
   provisioner "shell" {
-    execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    inline          = ["mkdir -p /etc/vsts", "cp /tmp/ubuntu2204.conf /etc/vsts/machine_instance.conf"]
+  execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  inline          = ["mkdir -p /etc/vsts", "cp /tmp/ubuntu2204.conf /etc/vsts/machine_instance.conf"]
   }
 
   provisioner "shell" {
-    execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    inline          = ["sleep 30", "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"]
+  execute_command = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+  inline          = ["sleep 30", "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"]
   }
 
 }

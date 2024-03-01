@@ -10,7 +10,7 @@ $global:ErrorActionPreference = "Stop"
 $global:ErrorView = "NormalView"
 Set-StrictMode -Version Latest
 
-Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Android.psm1") -DisableNameChecking
+# Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Android.psm1") -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Browsers.psm1") -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.CachedTools.psm1") -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot "SoftwareReport.Common.psm1") -DisableNameChecking
@@ -103,7 +103,7 @@ $tools.AddToolVersion("Bazelisk", $(Get-BazeliskVersion))
 $tools.AddToolVersion("Bicep", $(Get-BicepVersion))
 $tools.AddToolVersion("Buildah", $(Get-BuildahVersion))
 $tools.AddToolVersion("CMake", $(Get-CMakeVersion))
-$tools.AddToolVersion("CodeQL Action Bundle", $(Get-CodeQLBundleVersion))
+# $tools.AddToolVersion("CodeQL Action Bundle", $(Get-CodeQLBundleVersion))
 $tools.AddToolVersion("Docker Amazon ECR Credential Helper", $(Get-DockerAmazonECRCredHelperVersion))
 $tools.AddToolVersion("Docker Compose v1", $(Get-DockerComposeV1Version))
 $tools.AddToolVersion("Docker Compose v2", $(Get-DockerComposeV2Version))
@@ -172,11 +172,11 @@ $phpTools.AddToolVersion("Composer", $(Get-ComposerVersion))
 $phpTools.AddToolVersion("PHPUnit", $(Get-PHPUnitVersion))
 $phpTools.AddNote("Both Xdebug and PCOV extensions are installed, but only Xdebug is enabled.")
 
-$haskellTools = $installedSoftware.AddHeader("Haskell Tools")
-$haskellTools.AddToolVersion("Cabal", $(Get-CabalVersion))
-$haskellTools.AddToolVersion("GHC", $(Get-GHCVersion))
-$haskellTools.AddToolVersion("GHCup", $(Get-GHCupVersion))
-$haskellTools.AddToolVersion("Stack", $(Get-StackVersion))
+# $haskellTools = $installedSoftware.AddHeader("Haskell Tools")
+# $haskellTools.AddToolVersion("Cabal", $(Get-CabalVersion))
+# $haskellTools.AddToolVersion("GHC", $(Get-GHCVersion))
+# $haskellTools.AddToolVersion("GHCup", $(Get-GHCupVersion))
+# $haskellTools.AddToolVersion("Stack", $(Get-StackVersion))
 
 Initialize-RustEnvironment
 $rustTools = $installedSoftware.AddHeader("Rust Tools")
@@ -196,8 +196,8 @@ $browsersTools = $installedSoftware.AddHeader("Browsers and Drivers")
 $browsersTools.AddToolVersion("Google Chrome", $(Get-ChromeVersion))
 $browsersTools.AddToolVersion("ChromeDriver", $(Get-ChromeDriverVersion))
 $browsersTools.AddToolVersion("Chromium", $(Get-ChromiumVersion))
-$browsersTools.AddToolVersion("Microsoft Edge", $(Get-EdgeVersion))
-$browsersTools.AddToolVersion("Microsoft Edge WebDriver", $(Get-EdgeDriverVersion))
+# $browsersTools.AddToolVersion("Microsoft Edge", $(Get-EdgeVersion))
+# $browsersTools.AddToolVersion("Microsoft Edge WebDriver", $(Get-EdgeDriverVersion))
 $browsersTools.AddToolVersion("Selenium server", $(Get-SeleniumVersion))
 $browsersTools.AddToolVersion("Mozilla Firefox", $(Get-FirefoxVersion))
 $browsersTools.AddToolVersion("Geckodriver", $(Get-GeckodriverVersion))
@@ -229,9 +229,9 @@ $powerShellTools.AddHeader("PowerShell Modules").AddNodes($(Get-PowerShellModule
 
 $installedSoftware.AddHeader("Web Servers").AddTable($(Build-WebServersTable))
 
-$androidTools = $installedSoftware.AddHeader("Android")
-$androidTools.AddTable($(Build-AndroidTable))
-$androidTools.AddHeader("Environment variables").AddTable($(Build-AndroidEnvironmentTable))
+# $androidTools = $installedSoftware.AddHeader("Android")
+# $androidTools.AddTable($(Build-AndroidTable))
+# $androidTools.AddHeader("Environment variables").AddTable($(Build-AndroidEnvironmentTable))
 
 $installedSoftware.AddHeader("Cached Docker images").AddTable($(Get-CachedDockerImagesTableData))
 $installedSoftware.AddHeader("Installed apt packages").AddTable($(Get-AptPackages))
